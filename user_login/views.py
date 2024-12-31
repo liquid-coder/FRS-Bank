@@ -25,9 +25,19 @@ def user_login(request):
                 user = authenticate(username = name, password = user_pass)
                 if user is not None:
                     login(request,user)
+                    messages.success(request,'Login Successful')
                     return redirect('profile')
         else:
             form = AuthenticationForm()
         return render(request,'login.html',{'form':form})
     else:
         return redirect('profile')
+    
+def profile(request):
+    if request.user.is_authenticated:
+        return render(request,'profile.html',{'name':request.user})
+    else:
+        return redirect('login')
+def user_logout(request):
+    logout(request)
+    return redirect('login')
