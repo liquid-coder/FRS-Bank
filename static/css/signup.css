@@ -1,0 +1,119 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #e5e5ff; /* Light purple background */
+    
+}
+
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.form-card {
+    background-color: white;
+    border-radius: 8px;
+    width: 60%;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    font-size: 32px; /* Larger font size */
+    font-weight: 800; /* Boldest for "Signup" heading */
+    margin-bottom: 10px;
+    color: #333333;
+    text-align: center;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 600; /* Slightly less bold than "Signup" */
+    margin-bottom: 5px;
+    color: #333333;
+}
+
+input, select {
+    padding: 12px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #f0f0f0; /* Grey background for input boxes */
+    width: 100%; /* Make input boxes block */
+    display: block;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #5069f0;
+    box-shadow: 0 0 4px rgba(80, 105, 240, 0.5);
+}
+
+.error-text {
+    font-size: 12px;
+    color: #ff0000;
+    margin-top: 5px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: blueviolet;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    text-transform: uppercase;
+    font-weight: 700; /* Bold button text */
+}
+
+.submit-btn:hover {
+    background-color: #4057c6;
+}
+input, select {
+    padding: 15px; /* Add more padding for a larger height */
+    border: none; /* Remove border */
+    border-radius: 10px; /* Rounded corners */
+    font-size: 14px;
+    background-color: #f5f8fc; /* Light greyish-blue background */
+    width: 100%; /* Make input boxes block-level */
+    display: block;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+input:focus, select:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(80, 105, 240, 0.5); /* Add glow effect on focus */
+}
+
+.footer {
+    background-color: #343a40;
+    color: white;
+    padding: 10px; 
+    position: fixed;
+    bottom: 0!important;
+    width : 100%;
+}
+.footer a {
+    color: #007bff;
+    text-decoration: none;
+}
+.footer a:hover {
+    text-decoration: underline;
+} 

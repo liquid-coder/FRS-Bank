@@ -6,15 +6,16 @@ gender_choices = [
     ('Female','Female'),
 ]
 class user_signup(UserCreationForm):
-    # address = forms.CharField(max_length=100,required = True)
-    # gender = forms.ChoiceField(choices = gender_choices,required = True)
-    # nid = forms.IntegerField(label = 'National Identity Card Number',required = True) 
-    # phone_number = forms.CharField(max_length=11,required = True) 
-    # nid_pic = forms.ImageField(label = 'National Identity Card Photo')
-    # profile_pic = forms.ImageField()
+    address = forms.CharField(max_length=100,required = True)
+    gender = forms.ChoiceField(choices = gender_choices,required = True)
+    nid = forms.IntegerField(label = 'National Identity Card Number',required = True) 
+    phone_number = forms.CharField(max_length=11,required = True) 
+    nid_pic = forms.ImageField(label = 'National Identity Card Photo')
+    profile_pic = forms.ImageField()
+    birth_date = forms.DateField(widget=forms.DateInput(attrs={'type':'date'}))
+    city = forms.CharField(max_length= 100)
     class Meta:
         model = User
-        fields = ['username','first_name','last_name']
-                #  ,'email','address','gender','nid','phone_number','nid_pic','profile_pic']           
+        fields = ['username','first_name','last_name','email','address','gender','nid','phone_number','nid_pic','profile_pic','birth_date','city']           
         
      

@@ -1,0 +1,93 @@
+.container{
+    position: sticky; 
+    top: 0;
+    z-index: 1000; 
+    background-color: #343a40; 
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.hero {
+    background: linear-gradient(to right, white, indigo);
+    padding: 100px 0;
+}
+.hero h1 {
+    font-size: 3rem;
+}
+.services-icon {
+    font-size: 3rem;
+    color: #007bff;
+}
+
+.footer {
+    background-color: #343a40;
+    color: white;
+    padding: 10px; 
+    position: fixed;
+    bottom: 0!important;
+    width : 100%;
+}
+.footer a {
+    color: #007bff;
+    text-decoration: none;
+}
+.footer a:hover {
+    text-decoration: underline;
+} 
+
+.hero img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+#services{
+    background-color: #ffe6f2;
+}
+
+
+/* Center the card */
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Card header styling */
+.card-header {
+    background-color: #007bff;
+    color: white;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    padding: 15px;
+}
+
+/* Form control styling */
+.form-control {
+    margin-bottom: 15px;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+}
+
+.form-control:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+/* Button styling */
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
