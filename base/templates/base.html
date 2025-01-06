@@ -9,7 +9,7 @@
             {% block head_title %}{% endblock %}
         </title>
         <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
-
+        <link rel="stylesheet" href="{% static 'css/darkmode.css' %}">
         {% block head_extra %}{% endblock %}
         <style>
             footer {
@@ -26,6 +26,7 @@
                 {% include 'messages.html' %}
                 {% block content %}
                 {% endblock %}
+                <script src="{% static 'js/darkmode.js' %}"></script>
             </div>
             {% include 'footer.html' %}
 

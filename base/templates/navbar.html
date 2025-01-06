@@ -1,6 +1,10 @@
+{% load static %}
 <nav class="flex items-center justify-between flex-wrap bg-white p-6 px-10">
     <div class="flex items-center flex-shrink-0 text-white mr-6">
-        <span class="font-semibold text-xl tracking-tight text-blue-900"><a href="/">FRS Bank</a></span>
+        <a href="/" class="flex items-center">
+            <img src="{% static 'images/frs.png' %}" alt="FRS Bank Logo" class="h-16 w-16 mr-2 filter brightness-50 hover:brightness-75 transition duration-300 ease-in-out">
+            <span class="font-semibold text-2xl tracking-tight text-blue-900 hover:text-blue-700 transition duration-300 ease-in-out"></span>
+        </a>
     </div>
     <div class="block lg:hidden">
         <button class="flex items-center px-3 py-2 border rounded text-white border-white-400 hover:text-white hover:border-white">
@@ -40,5 +44,8 @@
                 <a href="{% url 'signup' %}" class="inline-block font-medium text-sm px-4 py-2 leading-none bg-blue-900 rounded text-white border-white hover:border-transparent hover:text-gray-800 hover:bg-white mt-4 lg:mt-0">Signup</a>
             </div>
         {% endif %}
+    </div>
+    <div>
+        <button id="dark-mode-toggle" class="bg-gray-800 text-white rounded py-2 px-4">Toggle Dark Mode</button>
     </div>
 </nav>

@@ -17,7 +17,7 @@ from transactions.forms import (
 from transactions.models import Transaction
 
 class TransactionCreateMixin(LoginRequiredMixin, CreateView):
-    template_name = 'transactions/transaction_form.html'
+    template_name = 'transaction_form.html'
     model = Transaction
     title = ''
     success_url = reverse_lazy('transaction_report')
@@ -112,7 +112,7 @@ class LoanRequestView(TransactionCreateMixin):
         return super().form_valid(form)
     
 class TransactionReportView(LoginRequiredMixin, ListView):
-    template_name = 'transactions/transaction_report.html'
+    template_name = 'transaction_report.html'
     model = Transaction
     balance = 0 # filter korar pore ba age amar total balance ke show korbe
     
@@ -173,7 +173,7 @@ class PayLoanView(LoginRequiredMixin, View):
 
 class LoanListView(LoginRequiredMixin,ListView):
     model = Transaction
-    template_name = 'transactions/loan_request.html'
+    template_name = 'loan_request.html'
     context_object_name = 'loans' # loan list ta ei loans context er moddhe thakbe
     
     def get_queryset(self):
