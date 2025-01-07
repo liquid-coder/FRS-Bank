@@ -9,5 +9,5 @@ class TransactionAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         obj.account.balance += obj.amount
         obj.balance_after_transaction = obj.account.balance
-        obj.account.save()
+        obj.save()
         super().save_model(request, obj, form, change)

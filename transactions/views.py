@@ -1,28 +1,25 @@
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin  # login chara jeno keo kisu korte na pare, kind of security purpose
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.shortcuts import get_object_or_404, redirect
 from django.views import View
 from django.http import HttpResponse
 from django.views.generic import CreateView, ListView
-from transactions.constants import DEPOSIT, WITHDRAWAL,LOAN, LOAN_PAID
+from transactions.constants import DEPOSIT, WITHDRAWAL,LOAN
 from datetime import datetime
 from django.db.models import Sum
-from transactions.forms import (
-    DepositForm,
-    WithdrawForm,
-    LoanRequestForm,
-)
+from transactions.forms import DepositForm,WithdrawForm,LoanRequestForm
+
 from transactions.models import Transaction
 
-class TransactionCreateMixin(LoginRequiredMixin, CreateView):
+class TransactionCreateMixin(LoginRequiredMixin, CreateView): # CreateView er sob kichu inherit kore nibe and notun object create, new record push in database and form create kore notun kore, successful redirect o kore 
     template_name = 'transaction_form.html'
     model = Transaction
-    title = ''
+    title = ''  #head_title er jnne
     success_url = reverse_lazy('transaction_report')
 
-    def get_form_kwargs(self):
+    def get_form_kwargs(self): # forms.py e j kwargs diye amount nislam oida view te use korte get_form_kwargs e use korte hbe
         kwargs = super().get_form_kwargs()
         kwargs.update({
             'account': self.request.user.account
@@ -39,10 +36,10 @@ class TransactionCreateMixin(LoginRequiredMixin, CreateView):
 
 
 class DepositMoneyView(TransactionCreateMixin):
-    form_class = DepositForm
-    title = 'Deposit'
+    form_class = DepositForm  # class based view er jnne form_class nam ta fixed
+    title = 'Deposit'  # title pass korbe user tokhn context akare template e chole jabe 
 
-    def get_initial(self):
+    def get_initial(self):  # ei function di user submit na krleo deposit er data database e transaction type chole jabe
         initial = {'transaction_type': DEPOSIT}
         return initial
 
@@ -101,7 +98,7 @@ class LoanRequestView(TransactionCreateMixin):
     def form_valid(self, form):
         amount = form.cleaned_data.get('amount')
         current_loan_count = Transaction.objects.filter(
-            account=self.request.user.account,transaction_type=3,loan_approve=True).count()
+            account=self.request.user.account,transaction_type=LOAN,loan_approve=True).count()
         if current_loan_count >= 3:
             return HttpResponse("You have cross the loan limits")
         messages.success(
@@ -145,30 +142,6 @@ class TransactionReportView(LoginRequiredMixin, ListView):
         return context
     
         
-class PayLoanView(LoginRequiredMixin, View):
-    def get(self, request, loan_id):
-        loan = get_object_or_404(Transaction, id=loan_id)
-        print(loan)
-        if loan.loan_approve:
-            user_account = loan.account
-                # Reduce the loan amount from the user's balance
-                # 5000, 500 + 5000 = 5500
-                # balance = 3000, loan = 5000
-            if loan.amount < user_account.balance:
-                user_account.balance -= loan.amount
-                loan.balance_after_transaction = user_account.balance
-                user_account.save()
-                loan.loan_approved = True
-                loan.transaction_type = LOAN_PAID
-                loan.save()
-                return redirect('transactions:loan_list')
-            else:
-                messages.error(
-            self.request,
-            f'Loan amount is greater than available balance'
-        )
-
-        return redirect('loan_list')
 
 
 class LoanListView(LoginRequiredMixin,ListView):
@@ -181,3 +154,6 @@ class LoanListView(LoginRequiredMixin,ListView):
         queryset = Transaction.objects.filter(account=user_account,transaction_type=3)
         print(queryset)
         return queryset
+    
+
+# views the basically j kwargs ta pabo oida forms e jabe and pop hobe then self.balance_after_transaction diye change kori super diye parent er data change kortesi

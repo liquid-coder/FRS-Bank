@@ -11,11 +11,8 @@ def signup(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data)
             user = form.save()
-            login(request, user)
-            print(user)
-            return redirect(reverse_lazy('profile'))
+            return redirect('login')
     else:
         form = UserRegistrationForm()
     
@@ -31,9 +28,9 @@ def user_login(request):
             if user is not None:
                 login(request, user)
                 if is_admin and user.is_staff:
-                    return redirect(reverse_lazy('admin_dashboard'))
+                    return redirect('admin_dashboard')
                 else:
-                    return redirect(reverse_lazy('homepage'))
+                    return redirect('homepage')
     else:
         form = AuthenticationForm()
     
@@ -42,7 +39,7 @@ def user_login(request):
 def user_logout(request): 
     if request.user.is_authenticated:
         logout(request)
-    return redirect(reverse_lazy('homepage'))
+    return redirect('homepage')
 
 def profile(request):
     if request.method == 'POST':

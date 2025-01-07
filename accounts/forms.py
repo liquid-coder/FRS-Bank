@@ -15,7 +15,7 @@ class UserRegistrationForm(UserCreationForm):
     country = forms.CharField(max_length=100)
     class Meta:
         model = User
-        fields = ['username', 'password1', 'password2', 'first_name', 'last_name', 'email', 'account_type', 'birth_date','gender', 'postal_code', 'city','country', 'street_address']
+        fields = ['username','first_name', 'last_name', 'email', 'account_type', 'birth_date','gender', 'postal_code', 'city','country', 'street_address']
         
         # form.save()
     def save(self, commit=True):
@@ -30,7 +30,7 @@ class UserRegistrationForm(UserCreationForm):
             city = self.cleaned_data.get('city')
             street_address = self.cleaned_data.get('street_address')
             
-            UserAddress.objects.create(
+            UserAddress.objects.create(   
                 user = our_user,
                 postal_code = postal_code,
                 country = country,
@@ -44,10 +44,10 @@ class UserRegistrationForm(UserCreationForm):
                 birth_date =birth_date,
                 account_no = 100000+ our_user.id
             )
-        return our_user
+        return our_user 
     
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs) # super() = UserCreationForm
         
         for field in self.fields:
             self.fields[field].widget.attrs.update({
@@ -74,7 +74,7 @@ class UserUpdateForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email']
+        fields = '__all__'
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -96,7 +96,7 @@ class UserUpdateForm(forms.ModelForm):
                 user_account = None
                 user_address = None
 
-            if user_account:
+            if user_account:  # initian = signup korar somoy user ja value oida show korbe
                 self.fields['account_type'].initial = user_account.account_type
                 self.fields['gender'].initial = user_account.gender
                 self.fields['birth_date'].initial = user_account.birth_date
@@ -107,7 +107,7 @@ class UserUpdateForm(forms.ModelForm):
 
     def save(self, commit=True):
         user = super().save(commit=False)
-        if commit:
+        if commit == True:
             user.save()
 
             user_account, created = UserBankAccount.objects.get_or_create(user=user) # jodi account thake taile seta jabe user_account ar jodi account na thake taile create hobe ar seta created er moddhe jabe

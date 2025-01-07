@@ -9,12 +9,12 @@ class Transaction(models.Model):
     
     amount = models.DecimalField(decimal_places=2, max_digits = 12)
     balance_after_transaction = models.DecimalField(decimal_places=2, max_digits = 12)
-    transaction_type = models.IntegerField(choices=TRANSACTION_TYPE, null = True)
-    timestamp = models.DateTimeField(auto_now_add=True)
+    transaction_type = models.IntegerField(choices=TRANSACTION_TYPE)
+    timestamp = models.DateTimeField(auto_now_add=True) # jokhon transaction hobe tokhon ei time save hobe
     loan_approve = models.BooleanField(default=False) 
     
     class Meta:
-        ordering = ['timestamp'] 
+        ordering = ['timestamp']  # built in ordering to order the timestamp in ascending order
 class LoanRequest(models.Model):
     STATUS_CHOICES = [
         ('pending', 'Pending'),
